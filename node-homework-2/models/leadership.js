@@ -23,6 +23,9 @@ var leadershipSchema = new Schema({
 		type: String,
 		required: true
 	}
+},
+{
+	timestamps: true
 });
 
 var leaderships = mongoose.model('Leadership', leadershipSchema);

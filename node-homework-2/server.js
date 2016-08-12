@@ -38,36 +38,31 @@ db.once('open', function () {
         if (err) throw err;
         console.log(dish);
 
-        db.collection('dishes').drop();
+         Promotions.create({
+            name: 'Weekend Grand Buffet',
+            image: 'images/buffet.png',
+            label: 'New',
+            price: '19.99',
+            description: 'Featuring...',
+        }, function (err, promotion) {
+            if (err) throw err;
+            console.log(promotion);
+
+            Leaderships.create({
+                name: 'Peter Pan',
+                image: 'images/alberto.png',
+                designation: 'Chief Epicurious Officer',
+                abbr: 'CEO',
+                description: 'Our CEO, Peter, ...',
+            }, function (err, leadership) {
+                if (err) throw err;
+                console.log(leadership);
+
+                db.collection('dishes').drop();
+                db.collection('leaderships').drop();
+                db.collection('promotions').drop();
+                db.close();
+            });
+        });
     });
-
-    Promotions.create({
-        name: 'Weekend Grand Buffet',
-        image: 'images/buffet.png',
-        label: 'New',
-        price: '19.99',
-        description: 'Featuring...',
-    }, function (err, promotion) {
-        if (err) throw err;
-        console.log(promotion);
-
-        db.collection('promotions').drop();
-    });
-
-    Leaderships.create({
-        name: 'Peter Pan',
-        image: 'images/alberto.png',
-        designation: 'Chief Epicurious Officer',
-        abbr: 'CEO',
-        description: 'Our CEO, Peter, ...',
-    }, function (err, leadership) {
-        if (err) throw err;
-        console.log(leadership);
-
-        db.collection('leaderships').drop();
-    });
-
-    setTimeout(function () {
-        db.close();
-    }, 1000)
 });
