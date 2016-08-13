@@ -13,7 +13,7 @@ dishRouter.route('/')
     Dishes.find(req.query)
         .populate('comments.postedBy')
         .exec(function (err, dish) {
-        if (err) return next(err);
+        if (err) next(err);
         res.json(dish);
     });
 })
