@@ -9,14 +9,14 @@ leaderRouter.use(bodyParser.json());
 leaderRouter.route('/')
 .get(function(req,res,next){
   Leadership.find({}, function(err, leader) {
-    if (err) return next(err);
+    if (err) throw err;
     res.json(leader);
   });
 })
 
 .post(function(req, res, next){
   Leadership.create(req.body, function (err, leader) {
-    if (err) return next(err);
+    if (err) throw err;
     console.log('leader created!');
     var id = leader._id;
 
@@ -29,7 +29,7 @@ leaderRouter.route('/')
 
 .delete(function(req, res, next){
   Leadership.remove({}, function (err, resp) {
-    if (err) return next(err);
+    if (err) throw err;
     res.json(resp);
   });
 });
@@ -37,7 +37,7 @@ leaderRouter.route('/')
 leaderRouter.route('/:promoId')
 .get(function(req,res,next){
   Leadership.findById(req.params.promoId, function (err, leader) {
-    if (err) return next(err);
+    if (err) throw err;
     res.json(leader);
   });
 })
@@ -48,14 +48,14 @@ leaderRouter.route('/:promoId')
   }, {
     new: true //ca
   }, function (err, leader) {
-    if (err) return next(err);
+    if (err) throw err;
     res.json(leader);
   });
 })
 
 .delete(function(req, res, next){
   Leadership.findByIdAndRemove(req.params.promoId, function (err, resp) {        
-    if (err) return next(err);
+    if (err) throw err;
     res.json(resp);
   });
 });

@@ -37,11 +37,8 @@ exports.verifyOrdinaryUser = function (req, res, next) {
 
 exports.verifyAdmin = function (req, res, next) {
     if(req.decoded._doc.admin) {
-        return next();
-    }
-    else {
-        // if there is no token
-        // return an error
+        next();
+    } else {
         var err = new Error('Not an administrative user!');
         err.status = 403;
         return next(err);
