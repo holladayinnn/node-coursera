@@ -14,7 +14,7 @@ favoriteRouter.route('/')
     .populate('postedBy')
     .populate('dishes')
     .exec(function (err, favorites) {
-        if (err) return err;
+        if (err) throw err;
         res.json(favorites);
     });
 })
