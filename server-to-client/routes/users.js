@@ -5,7 +5,7 @@ var User = require('../models/user');
 var Verify    = require('./verify');
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next) {
   //res.send('respond with a resource');
   User.find({}, function(err, users) {
     if (err) return next(err);
